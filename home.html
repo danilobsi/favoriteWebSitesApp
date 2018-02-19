@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="styles.css" rel="stylesheet">
+    </head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="javascript.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <form ng-submit="Add(new['main']); new['main'] = {}" class="box">
+        <h3><span>Favourites</span></h3>
+        <input type="text" ng-model="new['main'].name" placeholder="name"/>
+        <input type="text" ng-model="new['main'].url" placeholder="URL" required />
+        <input type="text" ng-model="new['main'].category" placeholder="category" required />
+        <button>Add</button>
+    </form>
+    <div ng-repeat="category in categoriesNames track by $index" class="box left">
+        
+        <h3>
+            <span ng-click="categories[category].edit = true" ng-hide="categories[category].edit">
+                {{category}}
+            </span> 
+            <button type="button" class="delete" ng-click="DeleteAllIn(category)"  ng-hide="categories[category].edit">
+                X
+            </button>
+
+
+            <form ng-submit="UpdateCategory(category, newCategory);" ng-show="categories[category].edit">
+                <input type="text" ng-model="newCategory" ng-value="category" />
+                <button>Update</button>
+                <button type="reset" ng-click="categories[category].edit = false">Cancel</button>
+            </form>
+        </h3>
+
+        <p>
+            <form ng-submit="Add(new[category], category); new[category] = {}">
+                <input type="text" ng-model="new[category].name" placeholder="name"/>
+                <input type="text" ng-model="new[category].url" placeholder="URL" required />
+                <button>Add</button>
+            </form>
+        </p>
+        <p ng-repeat="item in categories[category] track by $index">
+            <button type="button" ng-click="Delete(item)">X</button>
+            <a href="{{item.url}}" target="_blank">{{item.name}}</a>
+        </p>
+    </div>
+
+    <div class="clear">
+        <button type="button" ng-click="Download()">Download Content</button>
+    </div>
+</div>
+
+
+
+</body>
+</html>

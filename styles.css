@@ -1,0 +1,43 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    color: #444
+}
+a{
+    text-decoration-line: none;
+}
+a:hover{
+    text-decoration-line: underline;
+}
+h3 {
+    border-bottom: 1px solid #555;
+}
+h3 span{
+    font-size: 14px;
+    color: #555;
+    text-transform: capitalize;
+}
+button{
+    border: 1px solid #AAA;
+    border-radius: 3px;
+    color: #555;
+    background-color: #FFF
+}
+button.delete{
+    background-color: #c01f1f;
+    color: #FFF;
+    border: none;
+}
+input{
+    border: 1px solid #DEDEDE;
+}
+
+.box{
+    margin: 15px
+}
+.left{
+    float: left;
+}
+.clear{
+    clear: both;
+}
