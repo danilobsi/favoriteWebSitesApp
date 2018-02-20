@@ -12,7 +12,7 @@ app.controller('myCtrl', function($scope) {
     var localStorageKey = "webSites";
     $scope.webSites = JSON.parse(localStorage.getItem(localStorageKey)) || [];
 
-    UpdateProperties();
+    UpdateProperties($scope.webSites);
 
     $scope.Add = function(item, category){
         if (!item.name)
@@ -44,22 +44,27 @@ app.controller('myCtrl', function($scope) {
         }
     }
     $scope.UpdateCategory = function (previousName, newName){
-        $scope.webSites = $scope.webSites.map((item) => {
-            if (item.category == previousName)
-                item.category = newName;
-            return item;
-        });
+        if (newName){
+            $scope.webSites = $scope.webSites.map((item) => {
+                if (String(item.category).toLowerCase() == String(previousName).toLowerCase())
+                    item.category = String(newName).toLowerCase();
+                return item;
+            });
+        }
         UpdateWebSites($scope.webSites);
     }
 
     function UpdateWebSites(sites){
-        UpdateProperties();
+        UpdateProperties(sites);
         AddToLocalStorage(sites);
     }
 
-    function UpdateProperties(){        
-        $scope.categories = groupBy($scope.webSites, "category");
-        $scope.categoriesNames = Object.keys($scope.categories);
+    function UpdateProperties(sites){        
+        $scope.categories = groupBy(sites, "category");
+        $scope.categoriesNames = Object.keys($scope.categories).sort();
+        $scope.webSites = sites.sort((a, b) =>{
+            return a.name.localeCompare(b.name);
+        });
     }
 
     function AddToLocalStorage(webSites){
