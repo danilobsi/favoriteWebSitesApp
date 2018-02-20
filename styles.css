@@ -10,6 +10,7 @@ a:hover{
     text-decoration-line: underline;
 }
 h3 {
+    padding-bottom: 2px;
     border-bottom: 1px solid #555;
 }
 h3 span{
